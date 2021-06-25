@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Carrera.
+    -->
+    <changeSet id="20210623085153-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="ganador_id"
+                                 baseTableName="carrera"
+                                 constraintName="fk_carrera__ganador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="piloto"/>
+
+        <addForeignKeyConstraint baseColumnNames="segundo_puesto_id"
+                                 baseTableName="carrera"
+                                 constraintName="fk_carrera__segundo_puesto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="piloto"/>
+
+        <addForeignKeyConstraint baseColumnNames="tercer_puesto_id"
+                                 baseTableName="carrera"
+                                 constraintName="fk_carrera__tercer_puesto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="piloto"/>
+
+        <addForeignKeyConstraint baseColumnNames="carrera_id"
+                                 baseTableName="rel_carrera__no_terminan"
+                                 constraintName="fk_rel_carrera__no_terminan__carrera_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="carrera"/>
+
+        <addForeignKeyConstraint baseColumnNames="no_terminan_id"
+                                 baseTableName="rel_carrera__no_terminan"
+                                 constraintName="fk_rel_carrera__no_terminan__no_terminan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="piloto"/>
+    </changeSet>
+</databaseChangeLog>

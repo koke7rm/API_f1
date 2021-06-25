@@ -1,0 +1,56 @@
+{
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "apellido",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "pattern"],
+      "fieldValidateRulesPattern": "^[a-zA-Z ]*$"
+    },
+    {
+      "fieldName": "edad",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "coche",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "carrerasGanadas",
+      "otherEntityName": "carrera",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "ganador"
+    },
+    {
+      "relationshipName": "segundosPuestos",
+      "otherEntityName": "carrera",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "segundoPuesto"
+    },
+    {
+      "relationshipName": "tercerPuestos",
+      "otherEntityName": "carrera",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "tercerPuesto"
+    },
+    {
+      "relationshipName": "carrerasInacabadas",
+      "otherEntityName": "carrera",
+      "relationshipType": "many-to-many",
+      "ownerSide": false,
+      "otherEntityRelationshipName": "noTerminan"
+    }
+  ],
+  "service": "serviceClass",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Piloto",
+  "changelogDate": "20210623084605"
+}

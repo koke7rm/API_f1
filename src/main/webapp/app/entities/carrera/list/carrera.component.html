@@ -1,0 +1,105 @@
+<div>
+  <h2 id="page-heading" data-cy="CarreraHeading">
+    <span>Carreras</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-carrera"
+        [routerLink]="['/carrera/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Carrera </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="carreras?.length === 0">
+    <span>No carreras found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="carreras && carreras.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Nombre Circuito</span></th>
+          <th scope="col"><span>Pais</span></th>
+          <th scope="col"><span>Ganador</span></th>
+          <th scope="col"><span>Segundo Puesto</span></th>
+          <th scope="col"><span>Tercer Puesto</span></th>
+          <th scope="col"><span>No Terminan</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let carrera of carreras; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/carrera', carrera.id, 'view']">{{ carrera.id }}</a>
+          </td>
+          <td>{{ carrera.nombreCircuito }}</td>
+          <td>{{ carrera.pais }}</td>
+          <td>
+            <div *ngIf="carrera.ganador">
+              <a [routerLink]="['/piloto', carrera.ganador?.id, 'view']">{{ carrera.ganador?.apellido }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="carrera.segundoPuesto">
+              <a [routerLink]="['/piloto', carrera.segundoPuesto?.id, 'view']">{{ carrera.segundoPuesto?.apellido }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="carrera.tercerPuesto">
+              <a [routerLink]="['/piloto', carrera.tercerPuesto?.id, 'view']">{{ carrera.tercerPuesto?.apellido }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let noTerminan of carrera.noTerminans; let last = last">
+              <a class="form-control-static" [routerLink]="['/piloto', noTerminan.id, 'view']">{{ noTerminan.apellido }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/carrera', carrera.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/carrera', carrera.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(carrera)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

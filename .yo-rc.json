@@ -41,6 +41,8 @@
     "jwtSecretKey": "YTkyMmU4OTZkYmYxMmI1MzlhNzQ4MzVhMTJhMTA2NTYyY2Q1ZDU5ZTgzZWY0YTJiOWViNDJmYWVkMDMxYWE4ZWVjYWYyMDkxOGNmMmQxMDBlNzQzMGVkYTViMmY4MDY4ZjNlNWY2MjZhZTViM2EzM2Y5N2M3NGMxMjAwYmU3NDI=",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "lastLiquibaseTimestamp": 1624438313000,
+    "entities": ["Piloto", "Carrera"]
   }
 }

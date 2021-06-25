@@ -1,0 +1,118 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-carrera-heading" data-cy="CarreraCreateUpdateHeading">Create or edit a Carrera</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nombreCircuito">Nombre Circuito</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombreCircuito"
+            id="field_nombreCircuito"
+            data-cy="nombreCircuito"
+            formControlName="nombreCircuito"
+          />
+          <div
+            *ngIf="
+              editForm.get('nombreCircuito')!.invalid && (editForm.get('nombreCircuito')!.dirty || editForm.get('nombreCircuito')!.touched)
+            "
+          ></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_pais">Pais</label>
+          <input type="text" class="form-control" name="pais" id="field_pais" data-cy="pais" formControlName="pais" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_ganador">Ganador</label>
+          <select class="form-control" id="field_ganador" data-cy="ganador" name="ganador" formControlName="ganador">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="pilotoOption.id === editForm.get('ganador')!.value?.id ? editForm.get('ganador')!.value : pilotoOption"
+              *ngFor="let pilotoOption of pilotosSharedCollection; trackBy: trackPilotoById"
+            >
+              {{ pilotoOption.apellido }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_segundoPuesto">Segundo Puesto</label>
+          <select
+            class="form-control"
+            id="field_segundoPuesto"
+            data-cy="segundoPuesto"
+            name="segundoPuesto"
+            formControlName="segundoPuesto"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="pilotoOption.id === editForm.get('segundoPuesto')!.value?.id ? editForm.get('segundoPuesto')!.value : pilotoOption"
+              *ngFor="let pilotoOption of pilotosSharedCollection; trackBy: trackPilotoById"
+            >
+              {{ pilotoOption.apellido }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tercerPuesto">Tercer Puesto</label>
+          <select class="form-control" id="field_tercerPuesto" data-cy="tercerPuesto" name="tercerPuesto" formControlName="tercerPuesto">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="pilotoOption.id === editForm.get('tercerPuesto')!.value?.id ? editForm.get('tercerPuesto')!.value : pilotoOption"
+              *ngFor="let pilotoOption of pilotosSharedCollection; trackBy: trackPilotoById"
+            >
+              {{ pilotoOption.apellido }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="field_noTerminans">No Terminan</label>
+          <select
+            class="form-control"
+            id="field_noTerminans"
+            data-cy="noTerminan"
+            multiple
+            name="noTerminans"
+            formControlName="noTerminans"
+          >
+            <option
+              [ngValue]="getSelectedPiloto(pilotoOption, editForm.get('noTerminans')!.value)"
+              *ngFor="let pilotoOption of pilotosSharedCollection; trackBy: trackPilotoById"
+            >
+              {{ pilotoOption.apellido }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

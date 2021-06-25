@@ -1,0 +1,48 @@
+{
+  "fields": [
+    {
+      "fieldName": "nombreCircuito",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "pais",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "ganador",
+      "otherEntityName": "piloto",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "apellido"
+    },
+    {
+      "relationshipName": "segundoPuesto",
+      "otherEntityName": "piloto",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "apellido"
+    },
+    {
+      "relationshipName": "tercerPuesto",
+      "otherEntityName": "piloto",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "apellido"
+    },
+    {
+      "relationshipName": "noTerminan",
+      "otherEntityName": "piloto",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "apellido",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "carrerasInacabadas"
+    }
+  ],
+  "service": "serviceClass",
+  "dto": "no",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Carrera",
+  "changelogDate": "20210623085153"
+}

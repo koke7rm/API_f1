@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="carrera">
+      <h2 data-cy="carreraDetailsHeading"><span>Carrera</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ carrera.id }}</span>
+        </dd>
+        <dt><span>Nombre Circuito</span></dt>
+        <dd>
+          <span>{{ carrera.nombreCircuito }}</span>
+        </dd>
+        <dt><span>Pais</span></dt>
+        <dd>
+          <span>{{ carrera.pais }}</span>
+        </dd>
+        <dt><span>Ganador</span></dt>
+        <dd>
+          <div *ngIf="carrera.ganador">
+            <a [routerLink]="['/piloto', carrera.ganador?.id, 'view']">{{ carrera.ganador?.apellido }}</a>
+          </div>
+        </dd>
+        <dt><span>Segundo Puesto</span></dt>
+        <dd>
+          <div *ngIf="carrera.segundoPuesto">
+            <a [routerLink]="['/piloto', carrera.segundoPuesto?.id, 'view']">{{ carrera.segundoPuesto?.apellido }}</a>
+          </div>
+        </dd>
+        <dt><span>Tercer Puesto</span></dt>
+        <dd>
+          <div *ngIf="carrera.tercerPuesto">
+            <a [routerLink]="['/piloto', carrera.tercerPuesto?.id, 'view']">{{ carrera.tercerPuesto?.apellido }}</a>
+          </div>
+        </dd>
+        <dt><span>No Terminan</span></dt>
+        <dd>
+          <span *ngFor="let noTerminan of carrera.noTerminans; let last = last">
+            <a [routerLink]="['/piloto', noTerminan?.id, 'view']">{{ noTerminan.apellido }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/carrera', carrera.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

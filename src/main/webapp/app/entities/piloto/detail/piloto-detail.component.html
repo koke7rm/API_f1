@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="piloto">
+      <h2 data-cy="pilotoDetailsHeading"><span>Piloto</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ piloto.id }}</span>
+        </dd>
+        <dt><span>Nombre</span></dt>
+        <dd>
+          <span>{{ piloto.nombre }}</span>
+        </dd>
+        <dt><span>Apellido</span></dt>
+        <dd>
+          <span>{{ piloto.apellido }}</span>
+        </dd>
+        <dt><span>Edad</span></dt>
+        <dd>
+          <span>{{ piloto.edad }}</span>
+        </dd>
+        <dt><span>Coche</span></dt>
+        <dd>
+          <span>{{ piloto.coche }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/piloto', piloto.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
